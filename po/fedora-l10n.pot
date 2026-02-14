@@ -91,3 +91,11 @@ msgstr ""
 #: src/fedora_l10n/main.py:434
 msgid "Get Started"
 msgstr ""
+
+#: desktop file
+msgid "View Fedora translation progress via Weblate"
+msgstr ""
+
+#: desktop file
+msgid "translation;fedora;weblate;l10n;i18n;"
+msgstr ""
