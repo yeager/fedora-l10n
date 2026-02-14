@@ -397,7 +397,7 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
             issue_url="https://github.com/yeager/fedora-l10n/issues",
             transient_for=self,
             comments=_("A localization tool by Daniel Nylander"),
-            translator_credits=_("Translate this app: https://app.transifex.com/linguaedit/fedora-l10n/"),
+            translator_credits=_("Translate this app: https://app.transifex.com/danielnylander/fedora-l10n/"),
         )
         about.present()
 
