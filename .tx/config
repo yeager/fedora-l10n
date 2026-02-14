@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[o:yeager:p:fedora-l10n:r:fedora-l10n-pot]
+file_filter = po/<lang>.po
+source_file = po/fedora-l10n.pot
+source_lang = en
+type = PO
