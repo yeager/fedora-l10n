@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the fedora-l10n package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Daniel Nylander <po@danielnylander.se>, 2026
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: fedora-l10n 0.1.0\n"
+"Report-Msgid-Bugs-To: daniel@danielnylander.se\n"
+"POT-Creation-Date: 2026-02-14 10:36+0100\n"
+"PO-Revision-Date: 2026-02-14 09:50+0000\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
+"Language-Team: Swedish (https://app.transifex.com/danielnylander/teams/304762/sv/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/fedora_l10n/main.py:129
+msgid "Open in Weblate"
+msgstr "Öppna i Weblate"
+
+#: src/fedora_l10n/main.py:142 src/fedora_l10n/main.py:376
+#: src/fedora_l10n/main.py:389
+msgid "Fedora Translation Status"
+msgstr "Översättningsstatus för Fedora"
+
+#: src/fedora_l10n/main.py:161
+msgid "Back to projects"
+msgstr "Tillbaka till projekten"
+
+#: src/fedora_l10n/main.py:169
+msgid "Refresh"
+msgstr "Uppdatera"
+
+#: src/fedora_l10n/main.py:170
+msgid "Clear Cache"
+msgstr "Töm cache"
+
+#: src/fedora_l10n/main.py:171
+msgid "About"
+msgstr "Om"
+
+#: src/fedora_l10n/main.py:190
+msgid "Filter projects…"
+msgstr "Filtrera projekt..."
+
+#: src/fedora_l10n/main.py:195
+msgid "Language:"
+msgstr "Språk:"
+
+#: src/fedora_l10n/main.py:249 src/fedora_l10n/main.py:264
+msgid "Loading projects…"
+msgstr "Läser in projekt..."
+
+#: src/fedora_l10n/main.py:271
+#, python-brace-format
+msgid "Loading projects… page {page}/{total}"
+msgstr "Läser in projekt… sida {page}/{total}"
+
+#: src/fedora_l10n/main.py:287
+#, python-brace-format
+msgid "Loading statistics… {n}/{total}"
+msgstr "Läser in statistik… {n}/{total}"
+
+#: src/fedora_l10n/main.py:338
+msgid "Loading components…"
+msgstr "Läser in komponenter…"
+
+#: src/fedora_l10n/main.py:381
+#, python-brace-format
+msgid "Error: {msg}"
+msgstr "Fel: {msg}"
+
+#: src/fedora_l10n/main.py:425
+msgid "Welcome to Fedora Translation Status!"
+msgstr "Välkommen till Fedoras översättningsstatus!"
+
+#: src/fedora_l10n/main.py:427
+msgid ""
+"This app shows the translation progress of Fedora projects via the Weblate API.\n"
+"\n"
+"Your system language is auto-detected, but you can change it using the language field.\n"
+"\n"
+"Click on a project to see its components."
+msgstr ""
+"Denna app visar översättningsförloppet för Fedora-projekt via Weblate API.\n"
+"\n"
+"Ditt systems språk upptäcks automatiskt, men du kan ändra det med hjälp av språkfältet.\n"
+"\n"
+"Klicka på ett projekt för att se dess komponenter."
+
+#: src/fedora_l10n/main.py:434
+msgid "Get Started"
+msgstr "Kom igång"
+
+#: desktop file
+msgid "View Fedora translation progress via Weblate"
+msgstr "Visa översättningsframsteg i Fedora via Weblate"
+
+#: desktop file
+msgid "translation;fedora;weblate;l10n;i18n;"
+msgstr "översättning;fedora;weblate;l10n;i18n;"

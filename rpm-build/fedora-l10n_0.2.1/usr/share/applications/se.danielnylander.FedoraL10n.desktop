@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Fedora Translation Status
+Name[sv]=Fedora översättningsstatus
+Comment=View Fedora translation progress via Weblate
+Comment[sv]=Visa Fedora översättningsframsteg via Weblate
+Exec=fedora-l10n
+Icon=fedora-l10n
+Terminal=false
+Type=Application
+Categories=Development;Translation;
+Keywords=translation;fedora;weblate;l10n;i18n;
+Keywords[sv]=översättning;fedora;weblate;l10n;i18n;
