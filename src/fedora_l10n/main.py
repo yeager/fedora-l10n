@@ -387,7 +387,7 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
     def _on_about(self, action, param):
         about = Adw.AboutWindow(
             application_name=_("Fedora Translation Status"),
-            application_icon="preferences-desktop-locale",
+            application_icon="fedora-l10n",
             version=__version__,
             developer_name="Daniel Nylander",
             developers=["Daniel Nylander <daniel@danielnylander.se>"],
@@ -396,6 +396,8 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
             website="https://github.com/yeager/fedora-l10n",
             issue_url="https://github.com/yeager/fedora-l10n/issues",
             transient_for=self,
+            comments=_("A localization tool by Daniel Nylander"),
+            translator_credits=_("Translate this app: https://app.transifex.com/linguaedit/fedora-l10n/"),
         )
         about.present()
 

@@ -2,7 +2,7 @@
 Name=Fedora Translation Status
 Comment=View Fedora translation progress via Weblate
 Exec=fedora-l10n
-Icon=preferences-desktop-locale
+Icon=fedora-l10n
 Terminal=false
 Type=Application
 Categories=Development;Translation;
