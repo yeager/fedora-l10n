@@ -1,0 +1,103 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Transifex CLI
+        run: |
+          curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+          sudo mv tx /usr/local/bin/
+
+      - name: Pull translations from Transifex
+        env:
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+        run: |
+          tx pull -a --force --minimum-perc 10
+          echo "Translations pulled:"
+          ls -la po/*.po 2>/dev/null || echo "No translations yet"
+
+      - name: Compile translations (.po → .mo)
+        run: |
+          sudo apt-get install -y gettext
+          for po in po/*.po; do
+            [ -f "$po" ] || continue
+            lang=$(basename "$po" .po)
+            mkdir -p locale/$lang/LC_MESSAGES
+            msgfmt -o locale/$lang/LC_MESSAGES/fedora-l10n.mo "$po"
+            echo "Compiled: $lang"
+          done
+
+      - name: Build .deb
+        run: |
+          PKG=$(mktemp -d)
+          mkdir -p $PKG/usr/lib/python3/dist-packages/fedora_l10n
+          mkdir -p $PKG/usr/bin
+          mkdir -p $PKG/usr/share/applications
+          mkdir -p $PKG/DEBIAN
+
+          cp src/fedora_l10n/*.py $PKG/usr/lib/python3/dist-packages/fedora_l10n/
+
+          # Install translations
+          for mo in locale/*/LC_MESSAGES/fedora-l10n.mo; do
+            [ -f "$mo" ] || continue
+            lang=$(echo "$mo" | cut -d/ -f2)
+            mkdir -p $PKG/usr/share/locale/$lang/LC_MESSAGES
+            cp "$mo" $PKG/usr/share/locale/$lang/LC_MESSAGES/
+          done
+
+          # Install .desktop file
+          desktop=$(find data/ -name "*.desktop" 2>/dev/null | head -1)
+          [ -n "$desktop" ] && cp "$desktop" $PKG/usr/share/applications/
+
+          # Install icon
+          icon=$(find data/icons/ -name "*.svg" 2>/dev/null | head -1)
+          if [ -n "$icon" ]; then
+            mkdir -p $PKG/usr/share/icons/hicolor/scalable/apps
+            cp "$icon" $PKG/usr/share/icons/hicolor/scalable/apps/
+          fi
+
+          # Launcher
+          cat > $PKG/usr/bin/fedora-l10n << 'SCRIPT'
+#!/usr/bin/env python3
+from fedora_l10n.main import main
+main()
+SCRIPT
+          chmod +x $PKG/usr/bin/fedora-l10n
+
+          # Version from tag
+          VERSION=${GITHUB_REF_NAME#v}
+
+          cat > $PKG/DEBIAN/control << EOF
+Package: fedora-l10n
+Version: ${VERSION}-1
+Section: devel
+Priority: optional
+Architecture: all
+Depends: python3 (>= 3.10), python3-gi, gir1.2-gtk-4.0, gir1.2-adw-1
+Maintainer: Daniel Nylander <daniel@danielnylander.se>
+Homepage: https://github.com/yeager/fedora-l10n
+Description: View Fedora translation progress via Weblate API
+EOF
+
+          dpkg-deb --root-owner-group --build $PKG fedora-l10n_${VERSION}-1_all.deb
+
+      - name: Upload .deb to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+          gh release upload $GITHUB_REF_NAME fedora-l10n_${VERSION}-1_all.deb --clobber
