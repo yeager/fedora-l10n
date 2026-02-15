@@ -391,13 +391,13 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
             version=__version__,
             developer_name="Daniel Nylander",
             developers=["Daniel Nylander <daniel@danielnylander.se>"],
-            copyright="© 2025 Daniel Nylander",
+            copyright="© 2026 Daniel Nylander",
             license_type=Gtk.License.GPL_3_0,
             website="https://github.com/yeager/fedora-l10n",
             issue_url="https://github.com/yeager/fedora-l10n/issues",
             transient_for=self,
-            comments=_("A localization tool by Daniel Nylander"),
-            translator_credits=_("Translate this app: https://app.transifex.com/danielnylander/fedora-l10n/"),
+            comments=_("View Fedora translation status from Weblate"),
+            translator_credits="Daniel Nylander <daniel@danielnylander.se>",
         )
         about.present()
 
