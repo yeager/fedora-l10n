@@ -290,6 +290,12 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         menu_btn.set_menu_model(menu)
         header.pack_end(menu_btn)
 
+        # Theme toggle
+        self._theme_btn = Gtk.Button(icon_name="weather-clear-night-symbolic",
+                                     tooltip_text="Toggle dark/light theme")
+        self._theme_btn.connect("clicked", self._on_theme_toggle)
+        header.pack_end(self._theme_btn)
+
         # Actions
         refresh_action = Gio.SimpleAction.new("refresh", None)
         refresh_action.connect("activate", lambda a, p: self._load_projects())
@@ -400,6 +406,13 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         main_box.append(header)
         main_box.append(search_box)
         main_box.append(self._stack)
+
+        # Status bar
+        self._status_bar = Gtk.Label(label="", halign=Gtk.Align.START,
+                                     margin_start=12, margin_end=12, margin_bottom=4)
+        self._status_bar.add_css_class("dim-label")
+        self._status_bar.add_css_class("caption")
+        main_box.append(self._status_bar)
 
         self.set_content(main_box)
 
@@ -645,6 +658,20 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         about.present()
 
 
+
+    def _on_theme_toggle(self, _btn):
+        sm = Adw.StyleManager.get_default()
+        if sm.get_color_scheme() == Adw.ColorScheme.FORCE_DARK:
+            sm.set_color_scheme(Adw.ColorScheme.FORCE_LIGHT)
+            self._theme_btn.set_icon_name("weather-clear-night-symbolic")
+        else:
+            sm.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
+            self._theme_btn.set_icon_name("weather-clear-symbolic")
+
+    def _update_status_bar(self):
+        self._status_bar.set_text("Last updated: " + _dt_now.now().strftime("%Y-%m-%d %H:%M"))
+
+
 class FedoraL10nApp(Adw.Application):
     """Main application class."""
 
@@ -653,6 +680,32 @@ class FedoraL10nApp(Adw.Application):
         self._first_run_done = False
         if HAS_NOTIFY:
             _Notify.init(_NOTIFY_APP)
+
+    def do_startup(self):
+        Adw.Application.do_startup(self)
+        self.set_accels_for_action("app.quit", ["<Control>q"])
+        self.set_accels_for_action("app.refresh", ["F5"])
+        self.set_accels_for_action("app.shortcuts", ["<Control>slash"])
+        for n, cb in [("quit", lambda *_: self.quit()),
+                      ("refresh", lambda *_: self._do_refresh()),
+                      ("shortcuts", self._show_shortcuts_window)]:
+            a = Gio.SimpleAction.new(n, None); a.connect("activate", cb); self.add_action(a)
+
+    def _do_refresh(self):
+        w = self.get_active_window()
+        if w and hasattr(w, '_load_data'): w._load_data()
+        elif w and hasattr(w, '_on_refresh'): w._on_refresh(None)
+
+    def _show_shortcuts_window(self, *_args):
+        win = Gtk.ShortcutsWindow(transient_for=self.get_active_window(), modal=True)
+        section = Gtk.ShortcutsSection(visible=True, max_height=10)
+        group = Gtk.ShortcutsGroup(visible=True, title="General")
+        for accel, title in [("<Control>q", "Quit"), ("F5", "Refresh"), ("<Control>slash", "Keyboard shortcuts")]:
+            s = Gtk.ShortcutsShortcut(visible=True, accelerator=accel, title=title)
+            group.append(s)
+        section.append(group)
+        win.add_child(section)
+        win.present()
 
     def do_activate(self):
         win = self.get_active_window()
@@ -709,6 +762,7 @@ class FedoraL10nApp(Adw.Application):
             dialog.present()
             # Mark as done
             import os
+from datetime import datetime as _dt_now
             os.makedirs(os.path.dirname(flag), exist_ok=True)
             with open(flag, "w") as f:
                 f.write("1")
