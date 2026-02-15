@@ -15,7 +15,7 @@ from gi.repository import Gtk, Adw, GLib, Gio, Pango, Gdk  # noqa: E402
 from fedora_l10n import __version__, __app_id__
 from fedora_l10n.api import (
     get_projects, get_language_statistics, get_components,
-    get_component_statistics, clear_cache,
+    get_component_statistics, clear_cache, has_api_key, save_api_key,
 )
 
 # Gettext setup
@@ -232,6 +232,7 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         menu_btn = Gtk.MenuButton(icon_name="open-menu-symbolic")
         menu = Gio.Menu()
         menu.append(_("Refresh"), "win.refresh")
+        menu.append(_("API Key…"), "win.api-key")
         menu.append(_("Clear Cache"), "win.clear-cache")
         menu.append(_("About"), "win.about")
         menu_btn.set_menu_model(menu)
@@ -241,6 +242,10 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         refresh_action = Gio.SimpleAction.new("refresh", None)
         refresh_action.connect("activate", lambda a, p: self._load_projects())
         self.add_action(refresh_action)
+
+        apikey_action = Gio.SimpleAction.new("api-key", None)
+        apikey_action.connect("activate", self._on_api_key)
+        self.add_action(apikey_action)
 
         cache_action = Gio.SimpleAction.new("clear-cache", None)
         cache_action.connect("activate", self._on_clear_cache)
@@ -499,6 +504,40 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         self._spinner.stop()
         self._status_label.set_text(_("Error: {msg}").format(msg=msg))
 
+    def _on_api_key(self, action, param):
+        """Show dialog to enter Weblate API key."""
+        dialog = Adw.MessageDialog(
+            transient_for=self,
+            heading=_("Weblate API Key"),
+            body=_(
+                "A Weblate API key is needed to fetch translation statistics.\n\n"
+                "Get your key from:\nhttps://translate.fedoraproject.org/accounts/profile/#api\n\n"
+                "The key is stored securely in GNOME Keyring."
+            ),
+        )
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("save", _("Save"))
+        dialog.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
+
+        entry = Gtk.PasswordEntry()
+        entry.set_show_peek_icon(True)
+        entry.set_placeholder_text(_("Paste your API key here…"))
+        entry.set_margin_start(24)
+        entry.set_margin_end(24)
+        dialog.set_extra_child(entry)
+
+        def on_response(d, response):
+            if response == "save":
+                key = entry.get_text().strip()
+                if key:
+                    save_api_key(key)
+                    clear_cache()
+                    self._load_projects()
+            d.close()
+
+        dialog.connect("response", on_response)
+        dialog.present()
+
     def _on_clear_cache(self, action, param):
         clear_cache()
         self._load_projects()
@@ -539,6 +578,31 @@ class FedoraL10nApp(Adw.Application):
         win.present()
 
     def _show_welcome(self, win):
+        if not has_api_key():
+            dialog = Adw.MessageDialog(
+                transient_for=win,
+                heading=_("Weblate API Key Required"),
+                body=_(
+                    "This app needs a Weblate API key to fetch translation statistics "
+                    "from translate.fedoraproject.org.\n\n"
+                    "Without a key, all percentages will show 0%.\n\n"
+                    "Get your key from:\nhttps://translate.fedoraproject.org/accounts/profile/#api"
+                ),
+            )
+            dialog.add_response("later", _("Later"))
+            dialog.add_response("enter", _("Enter Key…"))
+            dialog.set_response_appearance("enter", Adw.ResponseAppearance.SUGGESTED)
+            dialog.set_default_response("enter")
+
+            def on_response(d, response):
+                d.close()
+                if response == "enter":
+                    win._on_api_key(None, None)
+
+            dialog.connect("response", on_response)
+            dialog.present()
+            return
+
         config_dir = GLib.get_user_config_dir()
         flag = f"{config_dir}/fedora-l10n/.welcome-done"
         if not GLib.file_test(flag, GLib.FileTest.EXISTS):

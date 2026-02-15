@@ -15,6 +15,88 @@ RATE_DELAY = 0.6  # seconds between requests
 MAX_RETRIES = 5
 
 _last_request_time = 0.0
+_api_key = None
+
+
+def _get_api_key() -> str | None:
+    """Get API key from libsecret (GNOME Keyring), env var, or config file."""
+    global _api_key
+    if _api_key is not None:
+        return _api_key if _api_key else None
+
+    # 1. Environment variable
+    key = os.environ.get("WEBLATE_API_KEY") or os.environ.get("FEDORA_WEBLATE_KEY")
+    if key:
+        _api_key = key
+        return key
+
+    # 2. libsecret / GNOME Keyring
+    try:
+        import gi
+        gi.require_version("Secret", "1")
+        from gi.repository import Secret
+        schema = Secret.Schema.new(
+            "se.danielnylander.fedora-l10n",
+            Secret.SchemaFlags.NONE,
+            {"service": Secret.SchemaAttributeType.STRING},
+        )
+        key = Secret.password_lookup_sync(
+            schema, {"service": "weblate-api-key"}, None
+        )
+        if key:
+            _api_key = key
+            return key
+    except Exception:
+        pass
+
+    # 3. Config file fallback
+    config_file = Path.home() / ".config" / "fedora-l10n" / "api-key"
+    if config_file.exists():
+        key = config_file.read_text().strip()
+        if key:
+            _api_key = key
+            return key
+
+    _api_key = ""
+    return None
+
+
+def save_api_key(key: str) -> bool:
+    """Save API key to libsecret (preferred) or config file."""
+    global _api_key
+    _api_key = key
+
+    # Try libsecret first
+    try:
+        import gi
+        gi.require_version("Secret", "1")
+        from gi.repository import Secret
+        schema = Secret.Schema.new(
+            "se.danielnylander.fedora-l10n",
+            Secret.SchemaFlags.NONE,
+            {"service": Secret.SchemaAttributeType.STRING},
+        )
+        Secret.password_store_sync(
+            schema, {"service": "weblate-api-key"},
+            Secret.COLLECTION_DEFAULT,
+            "Fedora Weblate API Key",
+            key, None,
+        )
+        return True
+    except Exception:
+        pass
+
+    # Fallback: config file
+    config_file = Path.home() / ".config" / "fedora-l10n" / "api-key"
+    config_file.parent.mkdir(parents=True, exist_ok=True)
+    config_file.write_text(key)
+    config_file.chmod(0o600)
+    return True
+
+
+def has_api_key() -> bool:
+    """Check if an API key is configured."""
+    return _get_api_key() is not None
 
 
 def _cache_path(url: str) -> Path:
@@ -57,7 +139,11 @@ def _fetch(url: str, use_cache: bool = True):
             time.sleep(RATE_DELAY - elapsed)
 
         try:
-            req = urllib.request.Request(url, headers={"Accept": "application/json"})
+            headers = {"Accept": "application/json"}
+            key = _get_api_key()
+            if key:
+                headers["Authorization"] = f"Token {key}"
+            req = urllib.request.Request(url, headers=headers)
             _last_request_time = time.time()
             with urllib.request.urlopen(req, timeout=30) as resp:
                 data = json.loads(resp.read().decode())

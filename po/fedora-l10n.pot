@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fedora-l10n\n"
 "Report-Msgid-Bugs-To: daniel@danielnylander.se\n"
-"POT-Creation-Date: 2026-02-15 10:18+0100\n"
+"POT-Creation-Date: 2026-02-15 11:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,8 +21,8 @@ msgstr ""
 msgid "Open in Weblate"
 msgstr ""
 
-#: src/fedora_l10n/main.py:198 src/fedora_l10n/main.py:441
-#: src/fedora_l10n/main.py:454
+#: src/fedora_l10n/main.py:198 src/fedora_l10n/main.py:497
+#: src/fedora_l10n/main.py:547
 msgid "Fedora Translation Status"
 msgstr ""
 
@@ -39,53 +39,106 @@ msgid "Refresh"
 msgstr ""
 
 #: src/fedora_l10n/main.py:235
-msgid "Clear Cache"
+msgid "API Key…"
 msgstr ""
 
 #: src/fedora_l10n/main.py:236
+msgid "Clear Cache"
+msgstr ""
+
+#: src/fedora_l10n/main.py:237
 msgid "About"
 msgstr ""
 
-#: src/fedora_l10n/main.py:255
+#: src/fedora_l10n/main.py:260
 msgid "Filter projects…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:260
+#: src/fedora_l10n/main.py:265
 msgid "Language:"
 msgstr ""
 
-#: src/fedora_l10n/main.py:314 src/fedora_l10n/main.py:329
+#: src/fedora_l10n/main.py:338 src/fedora_l10n/main.py:353
 msgid "Loading projects…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:336
+#: src/fedora_l10n/main.py:360
 #, python-brace-format
 msgid "Loading projects… page {page}/{total}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:352
+#: src/fedora_l10n/main.py:376
 #, python-brace-format
 msgid "Loading statistics… {n}/{total}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:403
+#: src/fedora_l10n/main.py:431
 msgid "Loading components…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:446
+#: src/fedora_l10n/main.py:505
 #, python-brace-format
 msgid "Error: {msg}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:464
+#: src/fedora_l10n/main.py:511
+msgid "Weblate API Key"
+msgstr ""
+
+#: src/fedora_l10n/main.py:513
+msgid ""
+"A Weblate API key is needed to fetch translation statistics.\n"
+"\n"
+"Get your key from:\n"
+"https://translate.fedoraproject.org/accounts/profile/#api\n"
+"\n"
+"The key is stored securely in GNOME Keyring."
+msgstr ""
+
+#: src/fedora_l10n/main.py:518
+msgid "Cancel"
+msgstr ""
+
+#: src/fedora_l10n/main.py:519
+msgid "Save"
+msgstr ""
+
+#: src/fedora_l10n/main.py:524
+msgid "Paste your API key here…"
+msgstr ""
+
+#: src/fedora_l10n/main.py:558
 msgid "View Fedora translation status from Weblate"
 msgstr ""
 
-#: src/fedora_l10n/main.py:492
+#: src/fedora_l10n/main.py:584
+msgid "Weblate API Key Required"
+msgstr ""
+
+#: src/fedora_l10n/main.py:586
+msgid ""
+"This app needs a Weblate API key to fetch translation statistics from "
+"translate.fedoraproject.org.\n"
+"\n"
+"Without a key, all percentages will show 0%.\n"
+"\n"
+"Get your key from:\n"
+"https://translate.fedoraproject.org/accounts/profile/#api"
+msgstr ""
+
+#: src/fedora_l10n/main.py:592
+msgid "Later"
+msgstr ""
+
+#: src/fedora_l10n/main.py:593
+msgid "Enter Key…"
+msgstr ""
+
+#: src/fedora_l10n/main.py:611
 msgid "Welcome to Fedora Translation Status!"
 msgstr ""
 
-#: src/fedora_l10n/main.py:494
+#: src/fedora_l10n/main.py:613
 msgid ""
 "This app shows the translation progress of Fedora projects via the Weblate "
 "API.\n"
@@ -96,6 +149,6 @@ msgid ""
 "Click on a project to see its components."
 msgstr ""
 
-#: src/fedora_l10n/main.py:501
+#: src/fedora_l10n/main.py:620
 msgid "Get Started"
 msgstr ""
