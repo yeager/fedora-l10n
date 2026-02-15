@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Fedora Translation Status — Main application."""
 
+import csv
 import gettext
+import json
 import locale
 import sys
 import threading
@@ -290,6 +292,12 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         menu_btn.set_menu_model(menu)
         header.pack_end(menu_btn)
 
+        # Export button
+        export_btn = Gtk.Button(icon_name="document-save-symbolic",
+                                tooltip_text=_("Export data"))
+        export_btn.connect("clicked", self._on_export_clicked)
+        header.pack_end(export_btn)
+
         # Theme toggle
         self._theme_btn = Gtk.Button(icon_name="weather-clear-night-symbolic",
                                      tooltip_text="Toggle dark/light theme")
@@ -486,6 +494,43 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
     def _on_search_changed(self, entry):
         self._filter_text = entry.get_text()
         self._rebuild_project_list()
+
+    def _on_export_clicked(self, *_args):
+        dialog = Adw.MessageDialog(transient_for=self,
+                                   heading=_("Export Data"),
+                                   body=_("Choose export format:"))
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("csv", "CSV")
+        dialog.add_response("json", "JSON")
+        dialog.set_response_appearance("csv", Adw.ResponseAppearance.SUGGESTED)
+        dialog.connect("response", self._on_export_format_chosen)
+        dialog.present()
+
+    def _on_export_format_chosen(self, dialog, response):
+        if response not in ("csv", "json"):
+            return
+        self._export_fmt = response
+        fd = Gtk.FileDialog()
+        fd.set_initial_name(f"fedora-l10n.{response}")
+        fd.save(self, None, self._on_export_save)
+
+    def _on_export_save(self, dialog, result):
+        try:
+            path = dialog.save_finish(result).get_path()
+        except Exception:
+            return
+        data = [{"project": p, "translated_percent": pct}
+                for p, pct in self._projects]
+        if not data:
+            return
+        if self._export_fmt == "csv":
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                w = csv.DictWriter(f, fieldnames=data[0].keys())
+                w.writeheader()
+                w.writerows(data)
+        else:
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
 
     def _on_lang_changed(self, entry):
         new_lang = entry.get_text().strip()
@@ -688,8 +733,10 @@ class FedoraL10nApp(Adw.Application):
         self.set_accels_for_action("app.shortcuts", ["<Control>slash"])
         for n, cb in [("quit", lambda *_: self.quit()),
                       ("refresh", lambda *_: self._do_refresh()),
-                      ("shortcuts", self._show_shortcuts_window)]:
+                      ("shortcuts", self._show_shortcuts_window),
+                      ("export", lambda *_: self.get_active_window() and self.get_active_window()._on_export_clicked())]:
             a = Gio.SimpleAction.new(n, None); a.connect("activate", cb); self.add_action(a)
+        self.set_accels_for_action("app.export", ["<Control>e"])
 
     def _do_refresh(self):
         w = self.get_active_window()
