@@ -12,6 +12,18 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Gtk, Adw, GLib, Gio, Pango, Gdk  # noqa: E402
 
+import json as _json
+import platform as _platform
+from pathlib import Path as _Path
+
+# Optional desktop notifications
+try:
+    gi.require_version("Notify", "0.7")
+    from gi.repository import Notify as _Notify
+    HAS_NOTIFY = True
+except (ValueError, ImportError):
+    HAS_NOTIFY = False
+
 from fedora_l10n import __version__, __app_id__
 from fedora_l10n.api import (
     get_projects, get_language_statistics, get_components,
@@ -22,6 +34,45 @@ from fedora_l10n.api import (
 gettext.bindtextdomain("fedora-l10n", "/usr/share/locale")
 gettext.textdomain("fedora-l10n")
 _ = gettext.gettext
+
+_NOTIFY_APP = "fedora-l10n"
+
+
+def _notify_config_path():
+    return _Path(GLib.get_user_config_dir()) / _NOTIFY_APP / "notifications.json"
+
+
+def _load_notify_config():
+    try:
+        return _json.loads(_notify_config_path().read_text())
+    except Exception:
+        return {"enabled": False}
+
+
+def _save_notify_config(config):
+    p = _notify_config_path()
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(_json.dumps(config))
+
+
+def _send_notification(summary, body="", icon="dialog-information"):
+    if HAS_NOTIFY and _load_notify_config().get("enabled"):
+        try:
+            n = _Notify.Notification.new(summary, body, icon)
+            n.show()
+        except Exception:
+            pass
+
+
+def _get_system_info():
+    return "\n".join([
+        f"App: Fedora Translation Status",
+        f"Version: {__version__}",
+        f"GTK: {Gtk.get_major_version()}.{Gtk.get_minor_version()}.{Gtk.get_micro_version()}",
+        f"Adw: {Adw.get_major_version()}.{Adw.get_minor_version()}.{Adw.get_micro_version()}",
+        f"Python: {_platform.python_version()}",
+        f"OS: {_platform.system()} {_platform.release()} ({_platform.machine()})",
+    ])
 
 
 def _detect_language() -> str:
@@ -234,6 +285,7 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         menu.append(_("Refresh"), "win.refresh")
         menu.append(_("API Key…"), "win.api-key")
         menu.append(_("Clear Cache"), "win.clear-cache")
+        menu.append(_("Notifications"), "win.toggle-notifications")
         menu.append(_("About"), "win.about")
         menu_btn.set_menu_model(menu)
         header.pack_end(menu_btn)
@@ -254,6 +306,10 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         about_action = Gio.SimpleAction.new("about", None)
         about_action.connect("activate", self._on_about)
         self.add_action(about_action)
+
+        notif_action = Gio.SimpleAction.new("toggle-notifications", None)
+        notif_action.connect("activate", self._on_toggle_notifications)
+        self.add_action(notif_action)
 
         # Search bar
         self._search_entry = Gtk.SearchEntry()
@@ -384,6 +440,14 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
     def _populate_projects(self, enriched):
         self._projects = enriched
         self._spinner.stop()
+        # Check for notification-worthy changes
+        low = [p.get("name", p.get("slug", "?")) for p, pct in enriched if pct < 50 and pct > 0]
+        if low:
+            _send_notification(
+                _("Fedora L10n: Low translations"),
+                _("{count} projects below 50%: {names}").format(
+                    count=len(low), names=", ".join(low[:5])),
+                "fedora-l10n")
         self._rebuild_project_list()
         if self._heatmap_mode:
             self._rebuild_heatmap()
@@ -542,6 +606,19 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         clear_cache()
         self._load_projects()
 
+    def _on_toggle_notifications(self, action, param):
+        config = _load_notify_config()
+        config["enabled"] = not config.get("enabled", False)
+        _save_notify_config(config)
+        state = _("enabled") if config["enabled"] else _("disabled")
+        dialog = Adw.MessageDialog(
+            transient_for=self,
+            heading=_("Notifications"),
+            body=_("Desktop notifications are now {state}.").format(state=state),
+        )
+        dialog.add_response("ok", _("OK"))
+        dialog.present()
+
     def _on_about(self, action, param):
         about = Adw.AboutWindow(
             application_name=_("Fedora Translation Status"),
@@ -558,6 +635,13 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
             comments=_("View Fedora translation status from Weblate"),
             translator_credits="Daniel Nylander <daniel@danielnylander.se>",
         )
+        # Copy system info button
+        copy_btn = Gtk.Button(label=_("Copy System Info"))
+        copy_btn.connect("clicked", lambda b: Gdk.Display.get_default().get_clipboard().set(_get_system_info()))
+        copy_btn.set_halign(Gtk.Align.CENTER)
+        copy_btn.set_margin_top(12)
+        about.set_debug_info(_get_system_info())
+        about.set_debug_info_filename("fedora-l10n-debug.txt")
         about.present()
 
 
@@ -567,6 +651,8 @@ class FedoraL10nApp(Adw.Application):
     def __init__(self):
         super().__init__(application_id=__app_id__)
         self._first_run_done = False
+        if HAS_NOTIFY:
+            _Notify.init(_NOTIFY_APP)
 
     def do_activate(self):
         win = self.get_active_window()
