@@ -1,0 +1,157 @@
+# Swedish translations for fedora-l package
+# Copyright (C) 2026 Free Software Foundation, Inc.
+# This file is distributed under the same license as the fedora-l package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fedora-l 10n\n"
+"POT-Creation-Date: 2026-02-15 15:38+0100\n"
+"PO-Revision-Date: 2026-02-15 15:38+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. type: TH
+#: data/man/fedora-l10n.1:1
+#, no-wrap
+msgid "FEDORA-L10N"
+msgstr ""
+
+#. type: TH
+#: data/man/fedora-l10n.1:1
+#, no-wrap
+msgid "2026-02-15"
+msgstr ""
+
+#. type: TH
+#: data/man/fedora-l10n.1:1
+#, no-wrap
+msgid "Daniel Nylander"
+msgstr ""
+
+#. type: TH
+#: data/man/fedora-l10n.1:1
+#, no-wrap
+msgid "Fedora L10n Manual"
+msgstr ""
+
+#. type: SH
+#: data/man/fedora-l10n.1:2
+#, no-wrap
+msgid "NAME"
+msgstr ""
+
+#. type: Plain text
+#: data/man/fedora-l10n.1:4
+msgid "fedora-l10n - View Fedora translation progress via Weblate"
+msgstr ""
+
+#. type: SH
+#: data/man/fedora-l10n.1:4
+#, no-wrap
+msgid "SYNOPSIS"
+msgstr ""
+
+#. type: Plain text
+#: data/man/fedora-l10n.1:6
+msgid "B<fedora-l10n>"
+msgstr ""
+
+#. type: SH
+#: data/man/fedora-l10n.1:6
+#, no-wrap
+msgid "DESCRIPTION"
+msgstr ""
+
+#. type: Plain text
+#: data/man/fedora-l10n.1:8
+msgid ""
+"B<fedora-l10n> is a GTK4/Adwaita application that shows translation progress "
+"of Fedora projects via the Weblate API. It lists all 127 Fedora translation "
+"projects with per-language statistics, color-coded progress bars, component-"
+"level drill-down, search and filter, direct Weblate links, and local caching "
+"with rate limiting."
+msgstr ""
+
+#. type: SH
+#: data/man/fedora-l10n.1:8
+#, no-wrap
+msgid "OPTIONS"
+msgstr ""
+
+#. type: TP
+#: data/man/fedora-l10n.1:9
+#, no-wrap
+msgid "B<--help>"
+msgstr ""
+
+#. type: Plain text
+#: data/man/fedora-l10n.1:12
+msgid "Show help message and exit."
+msgstr ""
+
+#. type: SH
+#: data/man/fedora-l10n.1:12
+#, no-wrap
+msgid "FILES"
+msgstr ""
+
+#. type: TP
+#: data/man/fedora-l10n.1:13
+#, no-wrap
+msgid "I<~/.config/fedora-l10n/>"
+msgstr ""
+
+#. type: Plain text
+#: data/man/fedora-l10n.1:16
+msgid "Configuration files."
+msgstr ""
+
+#. type: TP
+#: data/man/fedora-l10n.1:16
+#, no-wrap
+msgid "I<~/.cache/fedora-l10n/>"
+msgstr ""
+
+#. type: Plain text
+#: data/man/fedora-l10n.1:19
+msgid "Cached data."
+msgstr ""
+
+#. type: SH
+#: data/man/fedora-l10n.1:19
+#, no-wrap
+msgid "BUGS"
+msgstr ""
+
+#. type: Plain text
+#: data/man/fedora-l10n.1:21
+msgid "Report bugs at https://github.com/yeager/fedora-l10n/issues"
+msgstr ""
+
+#. type: SH
+#: data/man/fedora-l10n.1:21
+#, no-wrap
+msgid "AUTHOR"
+msgstr ""
+
+#. type: Plain text
+#: data/man/fedora-l10n.1:23
+msgid "Daniel Nylander E<lt>daniel@danielnylander.seE<gt>"
+msgstr ""
+
+#. type: SH
+#: data/man/fedora-l10n.1:23
+#, no-wrap
+msgid "SEE ALSO"
+msgstr ""
+
+#. type: Plain text
+#: data/man/fedora-l10n.1:24
+msgid "Project homepage: https://github.com/yeager/fedora-l10n"
+msgstr ""
