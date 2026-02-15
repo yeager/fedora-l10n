@@ -1,8 +1,8 @@
 # Fedora Translation Status
 
-A GTK4/Adwaita application that shows the translation progress of Fedora projects via the [Weblate API](https://translate.fedoraproject.org/).
+A GTK4/Adwaita application that shows the translation progress of Fedora projects via the Weblate API.
 
-![License](https://img.shields.io/badge/license-GPL--3.0-blue)
+![Screenshot](data/screenshots/screenshot-01.png)
 
 ## Features
 
@@ -13,20 +13,24 @@ A GTK4/Adwaita application that shows the translation progress of Fedora project
 - Drill-down: click a project to see component-level stats
 - Search and filter projects
 - Direct links to Weblate for translating
-- Local cache (~/.cache/fedora-l10n/, 1h TTL)
-- Rate limiting with exponential backoff
+- Local cache with 1h TTL and rate limiting
 
 ## Installation
 
-### From Debian repository
+### Debian/Ubuntu
 
 ```bash
+# Add repository
+curl -fsSL https://yeager.github.io/debian-repo/KEY.gpg | sudo gpg --dearmor -o /usr/share/keyrings/yeager-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/yeager-archive-keyring.gpg] https://yeager.github.io/debian-repo stable main" | sudo tee /etc/apt/sources.list.d/yeager.list
+sudo apt update
 sudo apt install fedora-l10n
 ```
 
-### From RPM repository
+### Fedora/RHEL
 
 ```bash
+sudo dnf config-manager --add-repo https://yeager.github.io/rpm-repo/yeager.repo
 sudo dnf install fedora-l10n
 ```
 
@@ -36,21 +40,6 @@ sudo dnf install fedora-l10n
 pip install .
 fedora-l10n
 ```
-
-## Requirements
-
-- Python 3.10+
-- GTK 4
-- libadwaita
-- PyGObject
-
-## License
-
-GPL-3.0-or-later — see [LICENSE](LICENSE)
-
-## Author
-
-Daniel Nylander <daniel@danielnylander.se>
 
 ## 🌍 Contributing Translations
 
@@ -72,3 +61,7 @@ Arabic, Czech, Danish, German, Spanish, Finnish, French, Italian, Japanese, Kore
 - Translations are pulled back and included in releases
 
 New language? Open an [issue](https://github.com/yeager/fedora-l10n/issues) and we'll add it!
+
+## License
+
+GPL-3.0-or-later — Daniel Nylander <daniel@danielnylander.se>
