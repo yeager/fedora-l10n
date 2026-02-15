@@ -2,10 +2,10 @@
 # Copyright (C) YEAR Daniel Nylander
 # This file is distributed under the same license as the fedora-l10n package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2026
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -14,12 +14,11 @@ msgstr ""
 "POT-Creation-Date: 2026-02-15 11:00+0100\n"
 "PO-Revision-Date: 2026-02-14 09:50+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
-"Language-Team: Swedish (https://app.transifex.com/danielnylander/teams/"
-"304762/sv/)\n"
-"Language: sv\n"
+"Language-Team: Swedish (https://app.transifex.com/danielnylander/teams/304762/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/fedora_l10n/main.py:129
@@ -45,7 +44,7 @@ msgstr "Uppdatera"
 
 #: src/fedora_l10n/main.py:235
 msgid "API Key…"
-msgstr ""
+msgstr "API-nyckel…"
 
 #: src/fedora_l10n/main.py:236
 msgid "Clear Cache"
@@ -88,7 +87,7 @@ msgstr "Fel: {msg}"
 
 #: src/fedora_l10n/main.py:511
 msgid "Weblate API Key"
-msgstr ""
+msgstr "Weblate API-nyckel"
 
 #: src/fedora_l10n/main.py:513
 msgid ""
@@ -99,18 +98,24 @@ msgid ""
 "\n"
 "The key is stored securely in GNOME Keyring."
 msgstr ""
+"En Weblate API-nyckel behövs för att hämta översättningsstatistik.\n"
+"\n"
+"Hämta din nyckel från:\n"
+"https://translate.fedoraproject.org/accounts/profile/#api\n"
+"\n"
+"Nyckeln lagras säkert i GNOME-nyckelring."
 
 #: src/fedora_l10n/main.py:518
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: src/fedora_l10n/main.py:519
 msgid "Save"
-msgstr ""
+msgstr "Spara"
 
 #: src/fedora_l10n/main.py:524
 msgid "Paste your API key here…"
-msgstr ""
+msgstr "Klistra in din API-nyckel här..."
 
 #: src/fedora_l10n/main.py:558
 msgid "View Fedora translation status from Weblate"
@@ -118,26 +123,31 @@ msgstr "Visa Fedoras översättningsstatus från Weblate"
 
 #: src/fedora_l10n/main.py:584
 msgid "Weblate API Key Required"
-msgstr ""
+msgstr "Weblate API-nyckel krävs"
 
 #: src/fedora_l10n/main.py:586
 msgid ""
-"This app needs a Weblate API key to fetch translation statistics from "
-"translate.fedoraproject.org.\n"
+"This app needs a Weblate API key to fetch translation statistics from translate.fedoraproject.org.\n"
 "\n"
 "Without a key, all percentages will show 0%.\n"
 "\n"
 "Get your key from:\n"
 "https://translate.fedoraproject.org/accounts/profile/#api"
 msgstr ""
+"Denna app behöver en Weblate API-nyckel för att hämta översättningsstatistik från translate.fedoraproject.org.\n"
+"\n"
+"Utan en nyckel kommer alla procenttal att visa 0%.\n"
+"\n"
+"Hämta din nyckel från:\n"
+"https://translate.fedoraproject.org/accounts/profile/#api"
 
 #: src/fedora_l10n/main.py:592
 msgid "Later"
-msgstr ""
+msgstr "Senare"
 
 #: src/fedora_l10n/main.py:593
 msgid "Enter Key…"
-msgstr ""
+msgstr "Ange nyckel..."
 
 #: src/fedora_l10n/main.py:611
 msgid "Welcome to Fedora Translation Status!"
@@ -145,18 +155,15 @@ msgstr "Välkommen till Fedoras översättningsstatus!"
 
 #: src/fedora_l10n/main.py:613
 msgid ""
-"This app shows the translation progress of Fedora projects via the Weblate "
-"API.\n"
+"This app shows the translation progress of Fedora projects via the Weblate API.\n"
 "\n"
-"Your system language is auto-detected, but you can change it using the "
-"language field.\n"
+"Your system language is auto-detected, but you can change it using the language field.\n"
 "\n"
 "Click on a project to see its components."
 msgstr ""
 "Denna app visar översättningsförloppet för Fedora-projekt via Weblate API.\n"
 "\n"
-"Ditt systems språk upptäcks automatiskt, men du kan ändra det med hjälp av "
-"språkfältet.\n"
+"Ditt systems språk upptäcks automatiskt, men du kan ändra det med hjälp av språkfältet.\n"
 "\n"
 "Klicka på ett projekt för att se dess komponenter."
 
