@@ -10,7 +10,7 @@ import webbrowser
 import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Gtk, Adw, GLib, Gio, Pango  # noqa: E402
+from gi.repository import Gtk, Adw, GLib, Gio, Pango, Gdk  # noqa: E402
 
 from fedora_l10n import __version__, __app_id__
 from fedora_l10n.api import (
@@ -134,6 +134,62 @@ class ComponentRow(Gtk.ListBoxRow):
         self.set_child(box)
 
 
+def _setup_heatmap_css():
+    """Install heatmap CSS classes."""
+    css = b"""
+    .heatmap-green { background-color: #26a269; color: white; border-radius: 8px; }
+    .heatmap-yellow { background-color: #e5a50a; color: white; border-radius: 8px; }
+    .heatmap-orange { background-color: #ff7800; color: white; border-radius: 8px; }
+    .heatmap-red { background-color: #c01c28; color: white; border-radius: 8px; }
+    .heatmap-gray { background-color: #77767b; color: white; border-radius: 8px; }
+    """
+    provider = Gtk.CssProvider()
+    provider.load_from_data(css)
+    Gtk.StyleContext.add_provider_for_display(
+        Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
+
+def _heatmap_css_class(pct):
+    if pct >= 100:
+        return "heatmap-green"
+    elif pct >= 75:
+        return "heatmap-yellow"
+    elif pct >= 50:
+        return "heatmap-orange"
+    elif pct > 0:
+        return "heatmap-red"
+    return "heatmap-gray"
+
+
+def _create_heatmap_cell(name, pct, tooltip=""):
+    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+    box.set_size_request(140, 64)
+    box.add_css_class(_heatmap_css_class(pct))
+    box.set_margin_start(4)
+    box.set_margin_end(4)
+    box.set_margin_top(4)
+    box.set_margin_bottom(4)
+    box.set_valign(Gtk.Align.CENTER)
+    box.set_halign(Gtk.Align.CENTER)
+
+    label = Gtk.Label(label=name)
+    label.set_ellipsize(Pango.EllipsizeMode.END)
+    label.set_max_width_chars(18)
+    label.set_margin_top(6)
+    label.set_margin_start(6)
+    label.set_margin_end(6)
+    box.append(label)
+
+    pct_label = Gtk.Label(label=f"{pct:.0f}%")
+    pct_label.set_margin_bottom(6)
+    box.append(pct_label)
+
+    if tooltip:
+        box.set_tooltip_text(tooltip)
+
+    return box
+
+
 class FedoraL10nWindow(Adw.ApplicationWindow):
     """Main application window."""
 
@@ -145,6 +201,9 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         self._lang = _detect_language()
         self._projects = []
         self._filter_text = ""
+        self._heatmap_mode = False
+
+        _setup_heatmap_css()
 
         # Main layout
         self._build_ui()
@@ -162,6 +221,12 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         self._back_btn.connect("clicked", self._on_back)
         self._back_btn.set_visible(False)
         header.pack_start(self._back_btn)
+
+        # Heatmap toggle
+        self._heatmap_btn = Gtk.ToggleButton(icon_name="view-grid-symbolic")
+        self._heatmap_btn.set_tooltip_text(_("Toggle heatmap view"))
+        self._heatmap_btn.connect("toggled", self._on_heatmap_toggled)
+        header.pack_start(self._heatmap_btn)
 
         # Menu button
         menu_btn = Gtk.MenuButton(icon_name="open-menu-symbolic")
@@ -225,6 +290,25 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         scrolled.set_child(self._project_list)
         project_page.append(scrolled)
         self._stack.add_named(project_page, "projects")
+
+        # Heatmap page for projects
+        heatmap_page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        heatmap_scrolled = Gtk.ScrolledWindow()
+        heatmap_scrolled.set_vexpand(True)
+        self._heatmap_flow = Gtk.FlowBox()
+        self._heatmap_flow.set_selection_mode(Gtk.SelectionMode.NONE)
+        self._heatmap_flow.set_homogeneous(True)
+        self._heatmap_flow.set_min_children_per_line(3)
+        self._heatmap_flow.set_max_children_per_line(8)
+        self._heatmap_flow.set_column_spacing(4)
+        self._heatmap_flow.set_row_spacing(4)
+        self._heatmap_flow.set_margin_start(12)
+        self._heatmap_flow.set_margin_end(12)
+        self._heatmap_flow.set_margin_top(12)
+        self._heatmap_flow.set_margin_bottom(12)
+        heatmap_scrolled.set_child(self._heatmap_flow)
+        heatmap_page.append(heatmap_scrolled)
+        self._stack.add_named(heatmap_page, "heatmap")
 
         # Component list page
         component_page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -296,7 +380,11 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         self._projects = enriched
         self._spinner.stop()
         self._rebuild_project_list()
-        self._stack.set_visible_child_name("projects")
+        if self._heatmap_mode:
+            self._rebuild_heatmap()
+            self._stack.set_visible_child_name("heatmap")
+        else:
+            self._stack.set_visible_child_name("projects")
 
     def _rebuild_project_list(self):
         # Clear
@@ -371,10 +459,41 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
 
         self._stack.set_visible_child_name("components")
 
+    def _on_heatmap_toggled(self, btn):
+        self._heatmap_mode = btn.get_active()
+        if self._heatmap_mode and self._projects:
+            self._rebuild_heatmap()
+            self._stack.set_visible_child_name("heatmap")
+        elif self._projects:
+            self._stack.set_visible_child_name("projects")
+
+    def _rebuild_heatmap(self):
+        while True:
+            child = self._heatmap_flow.get_first_child()
+            if child is None:
+                break
+            self._heatmap_flow.remove(child)
+
+        ft = self._filter_text.lower()
+        for proj, pct in sorted(self._projects, key=lambda x: x[1], reverse=True):
+            name = proj.get("name", proj.get("slug", ""))
+            slug = proj.get("slug", "")
+            if ft and ft not in name.lower() and ft not in slug.lower():
+                continue
+            cell = _create_heatmap_cell(name, pct, tooltip=slug)
+            gesture = Gtk.GestureClick()
+            gesture.connect("released", lambda g, n, x, y, s=slug: self._load_components(s))
+            cell.add_controller(gesture)
+            cell.set_cursor(Gdk.Cursor.new_from_name("pointer"))
+            self._heatmap_flow.append(cell)
+
     def _on_back(self, btn):
         self._back_btn.set_visible(False)
         self.set_title(_("Fedora Translation Status"))
-        self._stack.set_visible_child_name("projects")
+        if self._heatmap_mode:
+            self._stack.set_visible_child_name("heatmap")
+        else:
+            self._stack.set_visible_child_name("projects")
 
     def _show_error(self, msg):
         self._spinner.stop()

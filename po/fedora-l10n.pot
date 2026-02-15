@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) YEAR Daniel Nylander
 # This file is distributed under the same license as the fedora-l10n package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: fedora-l10n 0.1.0\n"
+"Project-Id-Version: fedora-l10n\n"
 "Report-Msgid-Bugs-To: daniel@danielnylander.se\n"
-"POT-Creation-Date: 2026-02-14 10:36+0100\n"
+"POT-Creation-Date: 2026-02-15 10:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,63 +21,71 @@ msgstr ""
 msgid "Open in Weblate"
 msgstr ""
 
-#: src/fedora_l10n/main.py:142 src/fedora_l10n/main.py:376
-#: src/fedora_l10n/main.py:389
+#: src/fedora_l10n/main.py:198 src/fedora_l10n/main.py:441
+#: src/fedora_l10n/main.py:454
 msgid "Fedora Translation Status"
 msgstr ""
 
-#: src/fedora_l10n/main.py:161
+#: src/fedora_l10n/main.py:220
 msgid "Back to projects"
 msgstr ""
 
-#: src/fedora_l10n/main.py:169
+#: src/fedora_l10n/main.py:227
+msgid "Toggle heatmap view"
+msgstr ""
+
+#: src/fedora_l10n/main.py:234
 msgid "Refresh"
 msgstr ""
 
-#: src/fedora_l10n/main.py:170
+#: src/fedora_l10n/main.py:235
 msgid "Clear Cache"
 msgstr ""
 
-#: src/fedora_l10n/main.py:171
+#: src/fedora_l10n/main.py:236
 msgid "About"
 msgstr ""
 
-#: src/fedora_l10n/main.py:190
+#: src/fedora_l10n/main.py:255
 msgid "Filter projects…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:195
+#: src/fedora_l10n/main.py:260
 msgid "Language:"
 msgstr ""
 
-#: src/fedora_l10n/main.py:249 src/fedora_l10n/main.py:264
+#: src/fedora_l10n/main.py:314 src/fedora_l10n/main.py:329
 msgid "Loading projects…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:271
+#: src/fedora_l10n/main.py:336
 #, python-brace-format
 msgid "Loading projects… page {page}/{total}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:287
+#: src/fedora_l10n/main.py:352
 #, python-brace-format
 msgid "Loading statistics… {n}/{total}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:338
+#: src/fedora_l10n/main.py:403
 msgid "Loading components…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:381
+#: src/fedora_l10n/main.py:446
 #, python-brace-format
 msgid "Error: {msg}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:425
+#: src/fedora_l10n/main.py:464
+msgid "View Fedora translation status from Weblate"
+msgstr ""
+
+#: src/fedora_l10n/main.py:492
 msgid "Welcome to Fedora Translation Status!"
 msgstr ""
 
-#: src/fedora_l10n/main.py:427
+#: src/fedora_l10n/main.py:494
 msgid ""
 "This app shows the translation progress of Fedora projects via the Weblate "
 "API.\n"
@@ -88,14 +96,6 @@ msgid ""
 "Click on a project to see its components."
 msgstr ""
 
-#: src/fedora_l10n/main.py:434
+#: src/fedora_l10n/main.py:501
 msgid "Get Started"
-msgstr ""
-
-#: desktop file
-msgid "View Fedora translation progress via Weblate"
-msgstr ""
-
-#: desktop file
-msgid "translation;fedora;weblate;l10n;i18n;"
 msgstr ""
