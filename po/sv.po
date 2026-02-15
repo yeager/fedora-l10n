@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) YEAR Daniel Nylander
 # This file is distributed under the same license as the fedora-l10n package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
@@ -9,9 +9,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: fedora-l10n 0.1.0\n"
+"Project-Id-Version: fedora-l10n\n"
 "Report-Msgid-Bugs-To: daniel@danielnylander.se\n"
-"POT-Creation-Date: 2026-02-14 10:36+0100\n"
+"POT-Creation-Date: 2026-02-15 10:18+0100\n"
 "PO-Revision-Date: 2026-02-14 09:50+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/danielnylander/teams/304762/sv/)\n"
@@ -25,63 +25,71 @@ msgstr ""
 msgid "Open in Weblate"
 msgstr "Öppna i Weblate"
 
-#: src/fedora_l10n/main.py:142 src/fedora_l10n/main.py:376
-#: src/fedora_l10n/main.py:389
+#: src/fedora_l10n/main.py:198 src/fedora_l10n/main.py:441
+#: src/fedora_l10n/main.py:454
 msgid "Fedora Translation Status"
 msgstr "Översättningsstatus för Fedora"
 
-#: src/fedora_l10n/main.py:161
+#: src/fedora_l10n/main.py:220
 msgid "Back to projects"
 msgstr "Tillbaka till projekten"
 
-#: src/fedora_l10n/main.py:169
+#: src/fedora_l10n/main.py:227
+msgid "Toggle heatmap view"
+msgstr "Växla till värmekarta"
+
+#: src/fedora_l10n/main.py:234
 msgid "Refresh"
 msgstr "Uppdatera"
 
-#: src/fedora_l10n/main.py:170
+#: src/fedora_l10n/main.py:235
 msgid "Clear Cache"
 msgstr "Töm cache"
 
-#: src/fedora_l10n/main.py:171
+#: src/fedora_l10n/main.py:236
 msgid "About"
 msgstr "Om"
 
-#: src/fedora_l10n/main.py:190
+#: src/fedora_l10n/main.py:255
 msgid "Filter projects…"
-msgstr "Filtrera projekt..."
+msgstr "Filtrera projekt…"
 
-#: src/fedora_l10n/main.py:195
+#: src/fedora_l10n/main.py:260
 msgid "Language:"
 msgstr "Språk:"
 
-#: src/fedora_l10n/main.py:249 src/fedora_l10n/main.py:264
+#: src/fedora_l10n/main.py:314 src/fedora_l10n/main.py:329
 msgid "Loading projects…"
-msgstr "Läser in projekt..."
+msgstr "Läser in projekt…"
 
-#: src/fedora_l10n/main.py:271
+#: src/fedora_l10n/main.py:336
 #, python-brace-format
 msgid "Loading projects… page {page}/{total}"
 msgstr "Läser in projekt… sida {page}/{total}"
 
-#: src/fedora_l10n/main.py:287
+#: src/fedora_l10n/main.py:352
 #, python-brace-format
 msgid "Loading statistics… {n}/{total}"
 msgstr "Läser in statistik… {n}/{total}"
 
-#: src/fedora_l10n/main.py:338
+#: src/fedora_l10n/main.py:403
 msgid "Loading components…"
 msgstr "Läser in komponenter…"
 
-#: src/fedora_l10n/main.py:381
+#: src/fedora_l10n/main.py:446
 #, python-brace-format
 msgid "Error: {msg}"
 msgstr "Fel: {msg}"
 
-#: src/fedora_l10n/main.py:425
+#: src/fedora_l10n/main.py:464
+msgid "View Fedora translation status from Weblate"
+msgstr "Visa Fedoras översättningsstatus från Weblate"
+
+#: src/fedora_l10n/main.py:492
 msgid "Welcome to Fedora Translation Status!"
 msgstr "Välkommen till Fedoras översättningsstatus!"
 
-#: src/fedora_l10n/main.py:427
+#: src/fedora_l10n/main.py:494
 msgid ""
 "This app shows the translation progress of Fedora projects via the Weblate API.\n"
 "\n"
@@ -95,14 +103,6 @@ msgstr ""
 "\n"
 "Klicka på ett projekt för att se dess komponenter."
 
-#: src/fedora_l10n/main.py:434
+#: src/fedora_l10n/main.py:501
 msgid "Get Started"
 msgstr "Kom igång"
-
-#: desktop file
-msgid "View Fedora translation progress via Weblate"
-msgstr "Visa översättningsframsteg i Fedora via Weblate"
-
-#: desktop file
-msgid "translation;fedora;weblate;l10n;i18n;"
-msgstr "översättning;fedora;weblate;l10n;i18n;"
