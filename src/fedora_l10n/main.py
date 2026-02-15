@@ -809,7 +809,6 @@ class FedoraL10nApp(Adw.Application):
             dialog.present()
             # Mark as done
             import os
-from datetime import datetime as _dt_now
             os.makedirs(os.path.dirname(flag), exist_ok=True)
             with open(flag, "w") as f:
                 f.write("1")
