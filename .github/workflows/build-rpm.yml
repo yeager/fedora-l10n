@@ -1,0 +1,113 @@
+name: Build RPM
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-rpm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install RPM tools
+        run: sudo apt-get update && sudo apt-get install -y rpm
+
+      - name: Get version
+        id: version
+        run: echo "version=$(grep -oP '__version__ = \"\K[^\"]+' src/fedora_l10n/__init__.py)" >> $GITHUB_OUTPUT
+
+      - name: Setup RPM build
+        run: |
+          mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+          VERSION=${{ steps.version.outputs.version }}
+          mkdir -p fedora-l10n-$VERSION/src/fedora_l10n
+          mkdir -p fedora-l10n-$VERSION/data/icons
+          cp src/fedora_l10n/*.py fedora-l10n-$VERSION/src/fedora_l10n/
+          cp data/se.danielnylander.FedoraL10n.desktop fedora-l10n-$VERSION/data/
+          cp data/icons/fedora-l10n.svg fedora-l10n-$VERSION/data/icons/
+          cp data/icons/se.danielnylander.fedora-l10n.svg fedora-l10n-$VERSION/data/icons/
+          mkdir -p fedora-l10n-$VERSION/data/man
+          cp data/man/fedora-l10n.1 fedora-l10n-$VERSION/data/man/
+
+          cp LICENSE fedora-l10n-$VERSION/
+          if [ -d locale ]; then
+            cp -r locale fedora-l10n-$VERSION/
+          fi
+          tar czf ~/rpmbuild/SOURCES/fedora-l10n-$VERSION.tar.gz fedora-l10n-$VERSION
+
+      - name: Create spec file
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          cat > ~/rpmbuild/SPECS/fedora-l10n.spec << SPEC
+Name:           fedora-l10n
+Version:        $VERSION
+Release:        1
+Summary:        fedora-l10n
+License:        GPL-3.0-or-later
+URL:            https://github.com/yeager/fedora-l10n
+Source0:        %{name}-%{version}.tar.gz
+BuildArch:      noarch
+Requires:       python3 >= 3.9
+Requires:       python3-gobject
+Requires:       gtk4
+Requires:       libadwaita
+
+%description
+fedora-l10n application.
+
+%prep
+%setup -q
+
+%install
+mkdir -p %{buildroot}%{_datadir}/fedora-l10n
+cp src/fedora_l10n/*.py %{buildroot}%{_datadir}/fedora-l10n/
+mkdir -p %{buildroot}%{_bindir}
+cat > %{buildroot}%{_bindir}/fedora-l10n << 'WRAPPER'
+#!/bin/bash
+exec python3 %{_datadir}/fedora-l10n/main.py "\$@"
+WRAPPER
+chmod 755 %{buildroot}%{_bindir}/fedora-l10n
+install -Dm644 data/se.danielnylander.FedoraL10n.desktop %{buildroot}%{_datadir}/applications/se.danielnylander.FedoraL10n.desktop
+install -Dm644 data/icons/fedora-l10n.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/fedora-l10n.svg
+install -Dm644 data/icons/se.danielnylander.fedora-l10n.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/se.danielnylander.fedora-l10n.svg
+install -Dm644 data/man/fedora-l10n.1 %{buildroot}%{_mandir}/man1/fedora-l10n.1
+
+if [ -d locale ]; then
+  for mo in locale/*/LC_MESSAGES/*.mo; do
+    [ -f "\$mo" ] || continue
+    lang=\$(echo "\$mo" | cut -d/ -f2)
+    install -Dm644 "\$mo" "%{buildroot}%{_datadir}/locale/\$lang/LC_MESSAGES/fedora-l10n.mo"
+  done
+fi
+
+%files
+%license LICENSE
+%{_bindir}/fedora-l10n
+%{_datadir}/fedora-l10n/
+%{_datadir}/applications/se.danielnylander.FedoraL10n.desktop
+%{_datadir}/icons/hicolor/scalable/apps/fedora-l10n.svg
+%{_datadir}/icons/hicolor/scalable/apps/se.danielnylander.fedora-l10n.svg
+%{_mandir}/man1/fedora-l10n.1*
+
+%changelog
+* Mon Feb 16 2026 Daniel Nylander <daniel@danielnylander.se> - $VERSION-1
+- RPM package
+SPEC
+
+      - name: Build RPM
+        run: rpmbuild -ba ~/rpmbuild/SPECS/fedora-l10n.spec
+
+      - name: Upload RPM to release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          gh release upload "v${VERSION}" \
+            ~/rpmbuild/RPMS/noarch/fedora-l10n-${VERSION}-1.noarch.rpm \
+            --clobber
