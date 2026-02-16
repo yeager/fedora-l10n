@@ -678,7 +678,7 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         dialog.present()
 
     def _on_about(self, action, param):
-        about = Adw.AboutWindow(
+        about = Adw.AboutDialog(
             application_name=_("Fedora Translation Status"),
             application_icon="fedora-l10n",
             version=__version__,
@@ -689,7 +689,6 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
             website="https://github.com/yeager/fedora-l10n",
             issue_url="https://github.com/yeager/fedora-l10n/issues",
             translate_url="https://app.transifex.com/danielnylander/fedora-l10n/",
-            transient_for=self,
             comments=_("View Fedora translation status from Weblate"),
             translator_credits="Daniel Nylander <daniel@danielnylander.se>",
         )
@@ -700,7 +699,7 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
         copy_btn.set_margin_top(12)
         about.set_debug_info(_get_system_info())
         about.set_debug_info_filename("fedora-l10n-debug.txt")
-        about.present()
+        about.present(self)
 
 
 
