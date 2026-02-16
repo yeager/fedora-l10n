@@ -152,3 +152,11 @@ msgstr ""
 #: src/fedora_l10n/main.py:620
 msgid "Get Started"
 msgstr ""
+
+#: fedora-l10n/data/se.danielnylander.FedoraL10n.desktop.in
+msgid "View Fedora translation progress via Weblate"
+msgstr ""
+
+#: fedora-l10n/data/se.danielnylander.FedoraL10n.desktop.in
+msgid "translation;fedora;weblate;l10n;i18n;"
+msgstr ""

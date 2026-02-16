@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Fedora Translation Status
+Name[sv]=Översättningsstatus för Fedora
 Comment=View Fedora translation progress via Weblate
 Exec=fedora-l10n
 Icon=fedora-l10n
