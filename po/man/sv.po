@@ -1,15 +1,20 @@
-# Swedish translations for fedora-l package
-# Copyright (C) 2026 Free Software Foundation, Inc.
-# This file is distributed under the same license as the fedora-l package.
-# Automatically generated, 2026.
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Translators:
+# Daniel Nylander <po@danielnylander.se>, 2026
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: fedora-l 10n\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2026-02-15 15:38+0100\n"
-"PO-Revision-Date: 2026-02-15 15:38+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-02-15 14:38+0000\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
+"Language-Team: Swedish (https://app.transifex.com/danielnylander/"
+"teams/304762/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,13 +31,13 @@ msgstr ""
 #: data/man/fedora-l10n.1:1
 #, no-wrap
 msgid "2026-02-15"
-msgstr ""
+msgstr "2026-02-15"
 
 #. type: TH
 #: data/man/fedora-l10n.1:1
 #, no-wrap
 msgid "Daniel Nylander"
-msgstr ""
+msgstr "Daniel Nylander"
 
 #. type: TH
 #: data/man/fedora-l10n.1:1
@@ -44,7 +49,7 @@ msgstr ""
 #: data/man/fedora-l10n.1:2
 #, no-wrap
 msgid "NAME"
-msgstr ""
+msgstr "NAMN"
 
 #. type: Plain text
 #: data/man/fedora-l10n.1:4
@@ -55,7 +60,7 @@ msgstr ""
 #: data/man/fedora-l10n.1:4
 #, no-wrap
 msgid "SYNOPSIS"
-msgstr ""
+msgstr "SYNOPSIS"
 
 #. type: Plain text
 #: data/man/fedora-l10n.1:6
@@ -66,7 +71,7 @@ msgstr ""
 #: data/man/fedora-l10n.1:6
 #, no-wrap
 msgid "DESCRIPTION"
-msgstr ""
+msgstr "BESKRIVNING"
 
 #. type: Plain text
 #: data/man/fedora-l10n.1:8
@@ -82,7 +87,7 @@ msgstr ""
 #: data/man/fedora-l10n.1:8
 #, no-wrap
 msgid "OPTIONS"
-msgstr ""
+msgstr "FLAGGOR"
 
 #. type: TP
 #: data/man/fedora-l10n.1:9
@@ -99,7 +104,7 @@ msgstr ""
 #: data/man/fedora-l10n.1:12
 #, no-wrap
 msgid "FILES"
-msgstr ""
+msgstr "FILER"
 
 #. type: TP
 #: data/man/fedora-l10n.1:13
@@ -110,7 +115,7 @@ msgstr ""
 #. type: Plain text
 #: data/man/fedora-l10n.1:16
 msgid "Configuration files."
-msgstr ""
+msgstr "Konfigurationsfiler."
 
 #. type: TP
 #: data/man/fedora-l10n.1:16
@@ -121,13 +126,13 @@ msgstr ""
 #. type: Plain text
 #: data/man/fedora-l10n.1:19
 msgid "Cached data."
-msgstr ""
+msgstr "Cachat data."
 
 #. type: SH
 #: data/man/fedora-l10n.1:19
 #, no-wrap
 msgid "BUGS"
-msgstr ""
+msgstr "BUGGAR"
 
 #. type: Plain text
 #: data/man/fedora-l10n.1:21
@@ -138,18 +143,18 @@ msgstr ""
 #: data/man/fedora-l10n.1:21
 #, no-wrap
 msgid "AUTHOR"
-msgstr ""
+msgstr "UPPHOVSPERSON"
 
 #. type: Plain text
 #: data/man/fedora-l10n.1:23
 msgid "Daniel Nylander E<lt>daniel@danielnylander.seE<gt>"
-msgstr ""
+msgstr "Daniel Nylander E<lt>daniel@danielnylander.seE<gt>"
 
 #. type: SH
 #: data/man/fedora-l10n.1:23
 #, no-wrap
 msgid "SEE ALSO"
-msgstr ""
+msgstr "SE ÄVEN"
 
 #. type: Plain text
 #: data/man/fedora-l10n.1:24
