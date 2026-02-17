@@ -6,9 +6,3 @@ file_filter = po/<lang>.po
 source_file = po/fedora-l10n.pot
 source_lang = en
 type = PO
-
-[o:danielnylander:p:fedora-l10n:r:fedora-l10n-man]
-file_filter  = po/man/<lang>.po
-source_file  = po/man/fedora-l10n.1.pot
-source_lang  = en
-type         = PO
