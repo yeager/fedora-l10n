@@ -2,7 +2,7 @@
 
 ## Screenshot
 
-![Ubuntu L10n](screenshots/main.png)
+![Fedora L10n](screenshots/main.png)
 
 A GTK4/Adwaita application that shows the translation progress of Fedora projects via the Weblate API.
 
