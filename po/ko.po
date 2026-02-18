@@ -1,0 +1,197 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-16 17:14+0100\n"
+"PO-Revision-Date: 2026-02-14 09:50+0000\n"
+"Language-Team: Korean (https://app.transifex.com/danielnylander/teams/304762/ko/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/fedora_l10n/main.py:182
+msgid "Open in Weblate"
+msgstr ""
+
+#: src/fedora_l10n/main.py:251 src/fedora_l10n/main.py:619
+#: src/fedora_l10n/main.py:682
+msgid "Fedora Translation Status"
+msgstr ""
+
+#: src/fedora_l10n/main.py:273
+msgid "Back to projects"
+msgstr ""
+
+#: src/fedora_l10n/main.py:280
+msgid "Toggle heatmap view"
+msgstr ""
+
+#: src/fedora_l10n/main.py:287
+msgid "Refresh"
+msgstr ""
+
+#: src/fedora_l10n/main.py:288
+msgid "API Key…"
+msgstr ""
+
+#: src/fedora_l10n/main.py:289
+msgid "Clear Cache"
+msgstr ""
+
+#: src/fedora_l10n/main.py:290 src/fedora_l10n/main.py:674
+msgid "Notifications"
+msgstr ""
+
+#: src/fedora_l10n/main.py:291
+msgid "About"
+msgstr ""
+
+#: src/fedora_l10n/main.py:297
+msgid "Export data"
+msgstr ""
+
+#: src/fedora_l10n/main.py:330
+msgid "Filter projects…"
+msgstr ""
+
+#: src/fedora_l10n/main.py:335
+msgid "Language:"
+msgstr ""
+
+#: src/fedora_l10n/main.py:408 src/fedora_l10n/main.py:430
+msgid "Loading projects…"
+msgstr ""
+
+#: src/fedora_l10n/main.py:437
+#, python-brace-format
+msgid "Loading projects… page {page}/{total}"
+msgstr ""
+
+#: src/fedora_l10n/main.py:453
+#, python-brace-format
+msgid "Loading statistics… {n}/{total}"
+msgstr ""
+
+#: src/fedora_l10n/main.py:468
+msgid "Fedora L10n: Low translations"
+msgstr ""
+
+#: src/fedora_l10n/main.py:469
+#, python-brace-format
+msgid "{count} projects below 50%: {names}"
+msgstr ""
+
+#: src/fedora_l10n/main.py:500
+msgid "Export Data"
+msgstr ""
+
+#: src/fedora_l10n/main.py:501
+msgid "Choose export format:"
+msgstr ""
+
+#: src/fedora_l10n/main.py:502 src/fedora_l10n/main.py:640
+msgid "Cancel"
+msgstr ""
+
+#: src/fedora_l10n/main.py:553
+msgid "Loading components…"
+msgstr ""
+
+#: src/fedora_l10n/main.py:627
+#, python-brace-format
+msgid "Error: {msg}"
+msgstr ""
+
+#: src/fedora_l10n/main.py:633
+msgid "Weblate API Key"
+msgstr ""
+
+#: src/fedora_l10n/main.py:635
+msgid ""
+"A Weblate API key is needed to fetch translation statistics.\n"
+"\n"
+"Get your key from:\n"
+"https://translate.fedoraproject.org/accounts/profile/#api\n"
+"\n"
+"The key is stored securely in GNOME Keyring."
+msgstr ""
+
+#: src/fedora_l10n/main.py:641
+msgid "Save"
+msgstr ""
+
+#: src/fedora_l10n/main.py:646
+msgid "Paste your API key here…"
+msgstr ""
+
+#: src/fedora_l10n/main.py:671
+msgid "enabled"
+msgstr ""
+
+#: src/fedora_l10n/main.py:671
+msgid "disabled"
+msgstr ""
+
+#: src/fedora_l10n/main.py:675
+#, python-brace-format
+msgid "Desktop notifications are now {state}."
+msgstr ""
+
+#: src/fedora_l10n/main.py:677
+msgid "OK"
+msgstr ""
+
+#: src/fedora_l10n/main.py:692
+msgid "View Fedora translation status from Weblate"
+msgstr ""
+
+#: src/fedora_l10n/main.py:696
+msgid "Copy System Info"
+msgstr ""
+
+#: src/fedora_l10n/main.py:769
+msgid "Weblate API Key Required"
+msgstr ""
+
+#: src/fedora_l10n/main.py:771
+msgid ""
+"This app needs a Weblate API key to fetch translation statistics from translate.fedoraproject.org.\n"
+"\n"
+"Without a key, all percentages will show 0%.\n"
+"\n"
+"Get your key from:\n"
+"https://translate.fedoraproject.org/accounts/profile/#api"
+msgstr ""
+
+#: src/fedora_l10n/main.py:777
+msgid "Later"
+msgstr ""
+
+#: src/fedora_l10n/main.py:778
+msgid "Enter Key…"
+msgstr ""
+
+#: src/fedora_l10n/main.py:796
+msgid "Welcome to Fedora Translation Status!"
+msgstr ""
+
+#: src/fedora_l10n/main.py:798
+msgid ""
+"This app shows the translation progress of Fedora projects via the Weblate API.\n"
+"\n"
+"Your system language is auto-detected, but you can change it using the language field.\n"
+"\n"
+"Click on a project to see its components."
+msgstr ""
+
+#: src/fedora_l10n/main.py:805
+msgid "Get Started"
+msgstr ""
