@@ -643,7 +643,7 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
 
         entry = Gtk.PasswordEntry()
         entry.set_show_peek_icon(True)
-        entry.set_placeholder_text(_("Paste your API key here…"))
+        entry.props.placeholder_text = _("Paste your API key here…")
         entry.set_margin_start(24)
         entry.set_margin_end(24)
         dialog.set_extra_child(entry)
@@ -688,7 +688,6 @@ class FedoraL10nWindow(Adw.ApplicationWindow):
             license_type=Gtk.License.GPL_3_0,
             website="https://github.com/yeager/fedora-l10n",
             issue_url="https://github.com/yeager/fedora-l10n/issues",
-            translate_url="https://app.transifex.com/danielnylander/fedora-l10n/",
             comments=_("View Fedora translation status from Weblate"),
             translator_credits="Daniel Nylander <daniel@danielnylander.se>",
         )
