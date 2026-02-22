@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the fedora-l10n package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: fedora-l10n\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-16 17:14+0100\n"
+"POT-Creation-Date: 2026-02-22 17:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,104 +17,104 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/fedora_l10n/main.py:182
+#: src/fedora_l10n/main.py:183
 msgid "Open in Weblate"
 msgstr ""
 
-#: src/fedora_l10n/main.py:251 src/fedora_l10n/main.py:619
-#: src/fedora_l10n/main.py:682
+#: src/fedora_l10n/main.py:252 src/fedora_l10n/main.py:620
+#: src/fedora_l10n/main.py:683
 msgid "Fedora Translation Status"
 msgstr ""
 
-#: src/fedora_l10n/main.py:273
+#: src/fedora_l10n/main.py:274
 msgid "Back to projects"
 msgstr ""
 
-#: src/fedora_l10n/main.py:280
+#: src/fedora_l10n/main.py:281
 msgid "Toggle heatmap view"
 msgstr ""
 
-#: src/fedora_l10n/main.py:287
+#: src/fedora_l10n/main.py:288
 msgid "Refresh"
 msgstr ""
 
-#: src/fedora_l10n/main.py:288
+#: src/fedora_l10n/main.py:289
 msgid "API Key…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:289
+#: src/fedora_l10n/main.py:290
 msgid "Clear Cache"
 msgstr ""
 
-#: src/fedora_l10n/main.py:290 src/fedora_l10n/main.py:674
+#: src/fedora_l10n/main.py:291 src/fedora_l10n/main.py:675
 msgid "Notifications"
 msgstr ""
 
-#: src/fedora_l10n/main.py:291
+#: src/fedora_l10n/main.py:292
 msgid "About"
 msgstr ""
 
-#: src/fedora_l10n/main.py:297
+#: src/fedora_l10n/main.py:298
 msgid "Export data"
 msgstr ""
 
-#: src/fedora_l10n/main.py:330
+#: src/fedora_l10n/main.py:331
 msgid "Filter projects…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:335
+#: src/fedora_l10n/main.py:336
 msgid "Language:"
 msgstr ""
 
-#: src/fedora_l10n/main.py:408 src/fedora_l10n/main.py:430
+#: src/fedora_l10n/main.py:409 src/fedora_l10n/main.py:431
 msgid "Loading projects…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:437
+#: src/fedora_l10n/main.py:438
 #, python-brace-format
 msgid "Loading projects… page {page}/{total}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:453
+#: src/fedora_l10n/main.py:454
 #, python-brace-format
 msgid "Loading statistics… {n}/{total}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:468
+#: src/fedora_l10n/main.py:469
 msgid "Fedora L10n: Low translations"
 msgstr ""
 
-#: src/fedora_l10n/main.py:469
+#: src/fedora_l10n/main.py:470
 #, python-brace-format
 msgid "{count} projects below 50%: {names}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:500
+#: src/fedora_l10n/main.py:501
 msgid "Export Data"
 msgstr ""
 
-#: src/fedora_l10n/main.py:501
+#: src/fedora_l10n/main.py:502
 msgid "Choose export format:"
 msgstr ""
 
-#: src/fedora_l10n/main.py:502 src/fedora_l10n/main.py:640
+#: src/fedora_l10n/main.py:503 src/fedora_l10n/main.py:641
 msgid "Cancel"
 msgstr ""
 
-#: src/fedora_l10n/main.py:553
+#: src/fedora_l10n/main.py:554
 msgid "Loading components…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:627
+#: src/fedora_l10n/main.py:628
 #, python-brace-format
 msgid "Error: {msg}"
 msgstr ""
 
-#: src/fedora_l10n/main.py:633
+#: src/fedora_l10n/main.py:634
 msgid "Weblate API Key"
 msgstr ""
 
-#: src/fedora_l10n/main.py:635
+#: src/fedora_l10n/main.py:636
 msgid ""
 "A Weblate API key is needed to fetch translation statistics.\n"
 "\n"
@@ -124,28 +124,28 @@ msgid ""
 "The key is stored securely in GNOME Keyring."
 msgstr ""
 
-#: src/fedora_l10n/main.py:641
+#: src/fedora_l10n/main.py:642
 msgid "Save"
 msgstr ""
 
-#: src/fedora_l10n/main.py:646
+#: src/fedora_l10n/main.py:647
 msgid "Paste your API key here…"
 msgstr ""
 
-#: src/fedora_l10n/main.py:671
+#: src/fedora_l10n/main.py:672
 msgid "enabled"
 msgstr ""
 
-#: src/fedora_l10n/main.py:671
+#: src/fedora_l10n/main.py:672
 msgid "disabled"
 msgstr ""
 
-#: src/fedora_l10n/main.py:675
+#: src/fedora_l10n/main.py:676
 #, python-brace-format
 msgid "Desktop notifications are now {state}."
 msgstr ""
 
-#: src/fedora_l10n/main.py:677
+#: src/fedora_l10n/main.py:678
 msgid "OK"
 msgstr ""
 
