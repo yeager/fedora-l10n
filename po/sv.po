@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the fedora-l10n package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,9 +9,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: fedora-l10n\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-16 17:14+0100\n"
+"POT-Creation-Date: 2026-02-22 11:05+0100\n"
 "PO-Revision-Date: 2026-02-14 09:50+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/danielnylander/teams/304762/sv/)\n"
@@ -159,19 +159,19 @@ msgstr "Skrivbordsaviseringar är nu {state}."
 msgid "OK"
 msgstr "OK"
 
-#: src/fedora_l10n/main.py:692
+#: src/fedora_l10n/main.py:691
 msgid "View Fedora translation status from Weblate"
 msgstr "Visa Fedoras översättningsstatus från Weblate"
 
-#: src/fedora_l10n/main.py:696
+#: src/fedora_l10n/main.py:695
 msgid "Copy System Info"
 msgstr "Kopiera systeminformation"
 
-#: src/fedora_l10n/main.py:769
+#: src/fedora_l10n/main.py:768
 msgid "Weblate API Key Required"
 msgstr "Weblate API-nyckel krävs"
 
-#: src/fedora_l10n/main.py:771
+#: src/fedora_l10n/main.py:770
 msgid ""
 "This app needs a Weblate API key to fetch translation statistics from translate.fedoraproject.org.\n"
 "\n"
@@ -187,19 +187,19 @@ msgstr ""
 "Hämta din nyckel från:\n"
 "https://translate.fedoraproject.org/accounts/profile/#api"
 
-#: src/fedora_l10n/main.py:777
+#: src/fedora_l10n/main.py:776
 msgid "Later"
 msgstr "Senare"
 
-#: src/fedora_l10n/main.py:778
+#: src/fedora_l10n/main.py:777
 msgid "Enter Key…"
 msgstr "Ange nyckel..."
 
-#: src/fedora_l10n/main.py:796
+#: src/fedora_l10n/main.py:795
 msgid "Welcome to Fedora Translation Status!"
 msgstr "Välkommen till Fedoras översättningsstatus!"
 
-#: src/fedora_l10n/main.py:798
+#: src/fedora_l10n/main.py:797
 msgid ""
 "This app shows the translation progress of Fedora projects via the Weblate API.\n"
 "\n"
@@ -213,6 +213,6 @@ msgstr ""
 "\n"
 "Klicka på ett projekt för att se dess komponenter."
 
-#: src/fedora_l10n/main.py:805
+#: src/fedora_l10n/main.py:804
 msgid "Get Started"
 msgstr "Kom igång"
