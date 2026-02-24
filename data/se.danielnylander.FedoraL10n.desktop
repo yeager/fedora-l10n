@@ -6,5 +6,6 @@ Exec=fedora-l10n
 Icon=se.danielnylander.fedora-l10n
 Terminal=false
 Type=Application
+StartupWMClass=se.danielnylander.fedora-l10n
 Categories=Development;Translation;
 Keywords=translation;fedora;weblate;l10n;i18n;

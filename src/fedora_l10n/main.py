@@ -721,6 +721,7 @@ class FedoraL10nApp(Adw.Application):
 
     def __init__(self):
         super().__init__(application_id=__app_id__)
+        GLib.set_application_name(_("Fedora Translation Status"))
         self._first_run_done = False
         if HAS_NOTIFY:
             _Notify.init(_NOTIFY_APP)
